@@ -15,6 +15,7 @@
    
 7. clone代码：
    $ git clone https://github.com/profgao/practice.git  
+   $ git clone ssh://jghuang@gerrit-eng.cienetcorp.com:29418/mats/node
 8. $ git show
 commit 85854bcc518965632d5aa220349b076bbda36400 (HEAD -> master, origin/master, origin/HEAD)
 Author: profgao <30335363+profgao@users.noreply.github.com>
