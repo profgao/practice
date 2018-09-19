@@ -1,0 +1,65 @@
+1. project list: 哪个是当前使用的
+
+2. project options: merge if necessary: 两人同时提交， 如果一个人要提交的文件要被另一个人挪位置，是谁做rebase？
+
+3. http://gerrit-eng.cienetcorp.com:8080/Documentation/user-upload.html#ssh: 使用SSH 操作git
+
+4. https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+   check if has ssh key:
+   $ ls -al ~/.ssh
+5. create ssh key
+   $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+6. 打开文件~/.ssh/id_rsa.pub, 不带空格，粘贴public key 到git server的ssh key上
+   用这个命令检查ssh连接情况：
+   $ ssh –p port your_user_name@gerrit_host   
+   
+7. clone代码：
+   $ git clone https://github.com/profgao/practice.git  
+8. $ git show
+commit 85854bcc518965632d5aa220349b076bbda36400 (HEAD -> master, origin/master, origin/HEAD)
+Author: profgao <30335363+profgao@users.noreply.github.com>
+Date:   Thu Sep 13 17:58:10 2018 +0800
+
+    add java example code
+
+diff --git a/.gitignore b/.gitignore...
+
+9. 在git add 之前先git status一下
+   git add, git commit,  将新增文件或变更文件添加到暂存区，然后commit这些文件到本地仓库
+   git push 将本地仓库的数据推送到其它仓库（远程仓库）
+   git pull 将数据从远程仓库到本地仓库
+   git fetch: 从远程仓库更新数据，并放到本地的远程分支上，不与本地仓库合并
+   git checkout: 切换本地分支
+   git config: 配置相关信息，例如email和name
+   git rebase: 将A分支的变更在B分支上重放一遍
+   git mv: 重命名文件或者文件夹
+   git rm: 删除文件或者文件夹
+
+10. git config:
+    etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 git config 时用 --system 选项，读写的就是这个文件。
+    ~/.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 git config 时用 --global 选项，读写的就是这个文件。
+    当前项目的 Git 目录中的配置文件（也就是工作目录中的 .git/config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。
+    $ git config --global user.name "John Doe"
+    $ git config --global user.email johndoe@example.com
+    $ git config --list
+
+11. 初次连接gerrit，需要输入passphrase
+$ ssh -p 29418 jghuang@10.100.8.10
+The authenticity of host '[10.100.8.10]:29418 ([10.100.8.10]:29418)' can't be established.
+RSA key fingerprint is SHA256:Du23T10Iy+5wjXI9ADZ9zs+/SmWPoFjpQl6qI8D5YtU.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '[10.100.8.10]:29418' (RSA) to the list of known hosts.
+Enter passphrase for key '/c/Users/jghuang/.ssh/id_rsa':
+
+  ****    Welcome to Gerrit Code Review    ****
+
+  Hi Jigang Huang, you have successfully connected over SSH.
+
+  Unfortunately, interactive shells are disabled.
+  To clone a hosted Git repository, use:
+
+  git clone ssh://jghuang@gerrit-eng.cienetcorp.com:29418/REPOSITORY_NAME.git
+
+Connection to 10.100.8.10 closed.
+
+
