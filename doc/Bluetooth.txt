@@ -1,0 +1,33 @@
+https://baike.baidu.com/item/%E8%93%9D%E7%89%99/102670?fr=aladdin
+*蓝牙由蓝牙技术联盟（Bluetooth Special Interest Group，简称SIG）管理。IEEE将蓝牙技术列为IEEE 802.15.1，但如今已不再维持该标准。蓝牙的波段为2400–2483.5MHz（包括防护频带）。这是全球范围内无需取得执照（但并非无管制的）的工业、科学和医疗用（ISM）波段的 2.4 GHz 短距离无线电频段。
+*蓝牙使用跳频技术，将传输的数据分割成数据包，通过79个指定的蓝牙频道分别传输数据包。每个频道的频宽为1 MHz。蓝牙4.0使用2 MHz 间距，可容纳40个频道。第一个频道始于2402 MHz，每1 MHz一个频道，至2480 MHz。有了适配跳频（Adaptive Frequency-Hopping，简称AFH）功能，通常每秒跳1600次。
+*蓝牙是基于数据包、有着主从架构的协议。一个主设备至多可和同一微微网中的七个从设备通讯。所有设备共享主设备的时钟。分组交换基于主设备定义的、以312.5µs为间隔运行的基础时钟。两个时钟周期构成一个625µs的槽，两个时间隙就构成了一个1250µs的缝隙对。在单槽封包的简单情况下，主设备在双数槽发送信息、单数槽接受信息。而从设备则正好相反。封包容量可长达1、3、或5个时间隙，但无论是哪种情况，主设备都会从双数槽开始传输，从设备从单数槽开始传输。
+*一般将蓝牙3.0之前的BR/EDR蓝牙称为传统蓝牙，而将蓝牙4.0规范下的LE蓝牙称为低功耗蓝牙。 蓝牙低功耗，也就是早前的Wibree，是蓝牙4.0版本的一个子集，早期的Wibree和蓝牙ULP（超低功耗）的名称被废除，取而代之的是后来用于一时的BLE（Bluetooh Low Energy）
+*蓝牙被定义为协议层架构，包括核心协议、电缆替代协议、电话传送控制协议、选用协议。所有蓝牙堆栈的强制性协议包括：LMP（链路管理协议）、L2CAP（逻辑链路控制与适配协议）和SDP（服务发现协议）。此外，与蓝牙通信的设备基本普遍都能使用HCI和 RFCOMM（射频通信）这些协议。
+
+
+蓝牙上层协议,服务端的启动,获取以及蓝牙设备的连接
+https://blog.csdn.net/u012439416/article/details/54347959
+
+
+蓝牙profile通信
+https://blog.csdn.net/jiyu5204651/article/details/51810528
+
+1. 蓝牙设备之间建立连接分为三个部分：1.Bond（Pair）、2.Profile、3.Socket
+   a. 通过查看源码，不难看出，createBond方法在执行时，调用了IPC，需要了解具体实现过程的，可以去查看“sService ”这个IPC类的源码
+   
+   b. 在android framework层中，Profile同样是封装成了一个个IPC类，在BluetoothAdapter中提供了”getProfileProxy(Context context, BluetoothProfile.ServiceListener listener, int profile)”方法连接IPC实例获取到这些Profile服务的代理来操作这些profile以及”closeProfileProxy(int profile, BluetoothProfile profile)”来关闭这些Profile的代理
+   * 该方法支持连接HEADSET、A2DP、A2DP_SINK、AVRCP、INPUT_DEVICE、PAN、HEALTH、MAP、HEADSET_CLIENT、SAP等相应的Profile。
+   * 当获取HEADSET Profile时，生成了一个BluetoothHeadset对象，该对象即是Headset IPC的代理，在该类中有"connect(BluetoothDevice device)"、"disconnect(BluetoothDevice device)"方法来连接和断开与设备的Profile链接等
+   
+   c. 绑定后的蓝牙设备之间是可以建立Socket通信的，这种Socket类似于TCP Socket，但略有不同，该Socket只能通过调用Android API来获取并连接，但通信操作是与TCP相同的，可以获取InputStream以及OutputStream来实现数据的交互。
+
+BLE4.0教程二 蓝牙协议之服务与特征值分析：https://www.cnblogs.com/asam/p/8676369.html
+蓝牙4.0版本推出了低功耗规范，引入了两个核心协议：ATT（Attribute Protocol）和GATT（Generic Attribute Protocol）.这两个协议主要目标是BLE，但是也可以运行在传统蓝牙上（BR/EDR)。
+ATT主要是规定了"属性"的定义，GATT则是将这些"属性"包装成我们上面所讲的服务、特征值等
+
+
+蓝牙服务的注册,启动源码分析： https://blog.csdn.net/u012439416/article/details/54347676
+
+SYD8801是一款低功耗高性能蓝牙低功耗SOC，集成了高性能2.4GHz射频收发机、32位ARM
+ Cortex-M0处理器、128kB Flash存储器、以及丰富的数字接口。SYD8801片上集成了Balun无需阻抗匹配网络、高效率DCDC降压转换器，适合用于可穿戴、物联网设备等。具体可咨询：http://www.syd-tek.com/
