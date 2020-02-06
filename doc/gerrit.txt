@@ -43,6 +43,11 @@ diff --git a/.gitignore b/.gitignore...
     $ git config --global user.name "John Doe"
     $ git config --global user.email johndoe@example.com
     $ git config --list
+	
+	或者仅仅配置用户名和邮箱到当前的git仓库：
+    $ git config user.name "username"
+    $ git config user.email "email@email.com"
+
 
 11. 初次连接gerrit，需要输入passphrase
 $ ssh -p 29418 jghuang@10.100.8.10
@@ -62,5 +67,13 @@ Enter passphrase for key '/c/Users/jghuang/.ssh/id_rsa':
   git clone ssh://jghuang@gerrit-eng.cienetcorp.com:29418/REPOSITORY_NAME.git
 
 Connection to 10.100.8.10 closed.
+
+12.
+create git repo and add file into repo
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/profgao/ArduinoI2C.git
+git push -u origin master
 
 
