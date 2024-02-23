@@ -11,7 +11,11 @@
    $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 6. 打开文件~/.ssh/id_rsa.pub, 不带空格，粘贴public key 到git server的ssh key上
    用这个命令检查ssh连接情况：
-   $ ssh –p port your_user_name@gerrit_host   
+   $ ssh –p port your_user_name@gerrit_host 
+
+   可以用这个命令测试和github的连接情况：
+    ssh -T git@github.com
+   如果一切顺利可以看到：Hi profgao! You've successfully authenticated, but GitHub does not provide shell access.  
    
 7. clone代码：
    $ git clone https://github.com/profgao/practice.git  
