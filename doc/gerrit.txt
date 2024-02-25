@@ -77,7 +77,15 @@ create git repo and add file into repo
 git init
 git add README.md
 git commit -m "first commit"
-git remote add origin https://github.com/profgao/ArduinoI2C.git
+
+在github上有‘’ArduinoI2C.git‘’这个库的前提下：
+git remote add origin https://github.com/profgao/ArduinoI2C.git 
+
 git push -u origin master
 
+13.
+switch to 'main' branch:
+git switch main
 
+show all of these branchs:
+git branch show
